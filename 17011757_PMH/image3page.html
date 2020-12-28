@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* {padding:0;margin:0;}
+body {background:#fff;}
+header {width:100%;position:relative;z-index:10;}
+.header-list {width:95%;margin:0 auto;font-size:0;padding:15px 0;}
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+.header-list li {font-family: 'Noto Sans KR', sans-serif;font-weight:bold}
+.header-list > li {font-size:12px;display:inline-block;vertical-align:middle;}
+.header-list > li:nth-child(1) {font-size:20px;width:200px;}
+.header-list > li:nth-child(2) {width:calc(100% - 250px);}
+.header-list > li:nth-child(3) {width:50px;}
+.header-list > li > div {width:auto;}
+
+.menu-ul {font-size:0;}
+.menu-ul > li {font-size:15px;display:inline-block;vertical-align:middle;}
+.menu-ul > li > a {display:block;width:auto;padding:15px; color : black; text-decoration:none;}
+
+input[id="menuicon"] {display:none;}
+input[id="menuicon"] + label {display:block;position:relative;width:100%;height:40px;cursor:pointer;}
+input[id="menuicon"] + label span {display:block;position:absolute;width:100%;height:3px;border-radius:30px;background:#666;transition:all .35s;}
+input[id="menuicon"] + label span:nth-child(1) {top:10%;}
+input[id="menuicon"] + label span:nth-child(2) {top:50%;transform:translateY(-50%);} 
+input[id="menuicon"] + label span:nth-child(3) {bottom:10%;}
+input[id="menuicon"]:checked + label {z-index:2;}
+input[id="menuicon"]:checked + label span:nth-child(1) {top:50%;transform:translateY(-50%) rotate(45deg);}
+input[id="menuicon"]:checked + label span:nth-child(2) {opacity:0;}
+input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:translateY(50%) rotate(-45deg);}
+div[class="sidebar"] {width:100%;height:0px;background:	white;position:fixed;top:115px;left:0;z-index:1;transition:all .35s;overflow:hidden;}
+input[id="menuicon"]:checked + label + div {height:150px;}
+
+.sitemap-ul {font-size:0;width:1200px;margin:15px auto;text-align:center;}
+.sitemap-ul > li {font-size:12px;display:inline-block;vertical-align:top;width:20%;}
+.sitemap-ul > li > a {display:block;width:auto;padding:15px; color : black; text-decoration:none;}
+.sitemap-ul > li > ul > li > a {display:block; color : black; text-decoration:none; color:#4682B4;}
+.sitemap-ul li { list-style-type :none }
+.menu-ul a:hover { color:#4682B4; }
+.sitemap-ul a:hover { color:#4682B4; }
+.imagetable{ font-family: 'Noto Sans KR', sans-serif;font-weight:bold}
+.buttonsize { font-family: 'Noto Sans KR', sans-serif;font-weight:bold; border-style:none; background:#4682B4; width:100px;height:45px; color:white; }
+</style>
+<script>
+	var timer=null;
+	function startTimer(time)
+	{
+		timer=setTimeout("load('index.html')", time);
+		document.getElementById("logo").title="홈으로 이동 중";
+	}
+	function cancelTimer()
+	{
+		if(timer!=null)
+			clearTimeout(timer);
+	}
+	function load(url)
+	{
+		window.location=url;
+	}
+
+   function change(obj){
+   	var color = obj.value;
+   	document.getElementById("colordiv").style.color= color;
+}
+</script>
+</head>
+<body>
+	<header>
+	<ul class="header-list" style="border-bottom: 3px solid #4682B4">
+		<li><div style="padding-left:50px"><img src="./images/LOGO.png" width="100px" height="70px" id="logo" onmouseover="startTimer(2000)" onmouseout="cancelTimer()"></div></li>
+		<li>
+			<div>
+				<ul class="menu-ul">
+					<li><a href="index.html">HOME</a></li>
+					<li><a href="PAGE2(introduction).html">회사소개</a></li>
+					<li><a href="PAGE3.html">아이콘 및 이미지</a></li>
+					<li><a href="PAGE4.html">아이콘 및 이미지 공유</a></li>
+					<li><a href="PAGE5.html">검색창</a></li>
+					<li><a href="PAGE6.html">로그인/회원가입</a></li>
+				</ul>
+			</div>
+		</li>
+		<li>
+			<div>
+				<input type="checkbox" id="menuicon">
+				<label for="menuicon">
+					<span></span>
+					<span></span>
+					<span></span>
+				</label>
+				<div class="sidebar">
+					<ul class="sitemap-ul">
+						<li><a href="index.html" style="font-size:13px">회사소개</a>
+						</li>
+						<li><a href="PAGE3.html" style="font-size:13px">아이콘 및 이미지</a>
+							<ul>
+								<li><a href="PAGE3.html">아이콘</a></li>
+								<li><a href="PAGE3.html">이미지</a></li>
+								<li><a href="PAGE3.html">인기 아이콘 및 이미지</a></li>
+							</ul>
+						</li>
+						<li><a href="PAGE4.html" style="font-size:13px">아이콘 및 이미지 공유</a>
+							<ul>
+								<li><a href="PAGE4.html">아이콘 및 이미지 공유</a></li>
+								<li><a href="#">공유 오류 신고</a></li>
+								<li><a href="#">Q&A</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>			
+			</div>
+		</li>
+	</ul>
+</header>
+
+<table class=imagetable><tr><td width="900px">
+<div style="padding-left: 330px;padding-top:130px;" >
+<img src="./images/image3.png" width="400px" height="300px">
+</div></td>
+<td>
+<form>
+	<div style="padding-top:150px; font-size:18px"> Coffee</div><br>
+	<div id="colordiv" >색상  <input type="color" id="colorInput"
+onchange="change(this)"></div>
+    <div style="font-size: 10px">*색상 선택하고 글씨로 확인해보세요:)*</div>
+</form>
+</td></tr></table>
+<br>
+<table class=imagetable width=750px  style="padding-left:350px;"><tr><td>
+<div style="text-align: center;">
+<a href="./images/image3.png" download><input type="button" value="다운로드" class=buttonsize>
+</a>
+</div></td>
+<td>
+<div style="text-align: center;"><a href="javascript:window.print()"> <input type="button" value="프린트" class=buttonsize onclick="window.print()"></a></div></td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* {padding:0;margin:0;}
+body {background:#fff;}
+header {width:100%;position:relative;z-index:10;}
+.header-list {width:95%;margin:0 auto;font-size:0;padding:15px 0;}
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+.header-list li {font-family: 'Noto Sans KR', sans-serif;font-weight:bold}
+.header-list > li {font-size:12px;display:inline-block;vertical-align:middle;}
+.header-list > li:nth-child(1) {font-size:20px;width:200px;}
+.header-list > li:nth-child(2) {width:calc(100% - 250px);}
+.header-list > li:nth-child(3) {width:50px;}
+.header-list > li > div {width:auto;}
+
+.menu-ul {font-size:0;}
+.menu-ul > li {font-size:15px;display:inline-block;vertical-align:middle;}
+.menu-ul > li > a {display:block;width:auto;padding:15px; color : black; text-decoration:none;}
+
+input[id="menuicon"] {display:none;}
+input[id="menuicon"] + label {display:block;position:relative;width:100%;height:40px;cursor:pointer;}
+input[id="menuicon"] + label span {display:block;position:absolute;width:100%;height:3px;border-radius:30px;background:#666;transition:all .35s;}
+input[id="menuicon"] + label span:nth-child(1) {top:10%;}
+input[id="menuicon"] + label span:nth-child(2) {top:50%;transform:translateY(-50%);} 
+input[id="menuicon"] + label span:nth-child(3) {bottom:10%;}
+input[id="menuicon"]:checked + label {z-index:2;}
+input[id="menuicon"]:checked + label span:nth-child(1) {top:50%;transform:translateY(-50%) rotate(45deg);}
+input[id="menuicon"]:checked + label span:nth-child(2) {opacity:0;}
+input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:translateY(50%) rotate(-45deg);}
+div[class="sidebar"] {width:100%;height:0px;background:	white;position:fixed;top:115px;left:0;z-index:1;transition:all .35s;overflow:hidden;}
+input[id="menuicon"]:checked + label + div {height:150px;}
+
+.sitemap-ul {font-size:0;width:1200px;margin:15px auto;text-align:center;}
+.sitemap-ul > li {font-size:12px;display:inline-block;vertical-align:top;width:20%;}
+.sitemap-ul > li > a {display:block;width:auto;padding:15px; color : black; text-decoration:none;}
+.sitemap-ul > li > ul > li > a {display:block; color : black; text-decoration:none; color:#4682B4;}
+.sitemap-ul li { list-style-type :none }
+.menu-ul a:hover { color:#4682B4; }
+.sitemap-ul a:hover { color:#4682B4; }
+
+
+.section input[id*="slide"] {display:none;}
+.section .slidewrap {max-width:800px;margin:0 auto;}
+.section .slidelist {white-space:nowrap;font-size:0;overflow:hidden;position:relative;}
+.section .slidelist > li {display:inline-block;vertical-align:middle;width:100%;transition:all .5s;}
+.section .slidelist > li > a {display:block;position:relative;}
+.section .slidelist > li > a img {width:100%;}
+.section .slidelist label {position:absolute;z-index:10;top:50%;transform:translateY(-50%);padding:50px;cursor:pointer;}
+.section .slidelist .textbox {position:absolute;z-index:1;top:50%;left:50%;transform:translate(-50%,-50%);line-height:1.6;text-align:center;}
+.section .slidelist .textbox h3 {font-size:36px;color:#fff;;transform:translateY(50px);transition:all .5s; font-family: 'Noto Sans KR', sans-serif;font-weight:bold;}
+.section .slidelist .textbox p {font-size:16px;color:#fff;opacity:0;transform:translateY(30px);transition:all .5s;font-family: 'Noto Sans KR', sans-serif;font-weight:bold;}
+	
+
+.section input[id="slide01"]:checked ~ .slidewrap .slidelist > li {transform:translateX(0%);}
+.section input[id="slide02"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-100%);}
+.section input[id="slide03"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-200%);}
+
+.section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .textbox h3 {opacity:1;transform:translateY(0);transition-delay:.2s;}
+.section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .textbox p {opacity:1;transform:translateY(0);transition-delay:.4s;}
+.section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .textbox h3 {opacity:1;transform:translateY(0);transition-delay:.2s;}
+.section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .textbox p {opacity:1;transform:translateY(0);transition-delay:.4s;}
+.section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .textbox h3 {opacity:1;transform:translateY(0);transition-delay:.2s;}
+.section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .textbox p {opacity:1;transform:translateY(0);transition-delay:.4s;}
+
+
+.slide-control > div {display:none;}
+.section .left {left:30px;background:url('./images/left.png') center center / 100% no-repeat;}
+.section .right {right:30px;background:url('./images/right.png') center center / 100% no-repeat;}
+.section input[id="slide01"]:checked ~ .slidewrap .slide-control > div:nth-child(1) {display:block;}
+.section input[id="slide02"]:checked ~ .slidewrap .slide-control > div:nth-child(2) {display:block;}
+.section input[id="slide03"]:checked ~ .slidewrap .slide-control > div:nth-child(3) {display:block;}
+
+.slide-pagelist {text-align:center;padding:20px;}
+.slide-pagelist > li {display:inline-block;vertical-align:middle;}
+.slide-pagelist > li > label {display:block;padding:8px 30px;border-radius:30px;background:#ccc;margin:20px 10px;cursor:pointer;}
+.section input[id="slide01"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(1) > label {background:#999;}
+.section input[id="slide02"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(2) > label {background:#999;}
+.section input[id="slide03"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(3) > label {background:#999;}
+
+</style>
+<script>
+	var timer=null;
+	function startTimer(time)
+	{
+		timer=setTimeout("load('index.html')", time);
+		document.getElementById("logo").title="홈으로 이동 중";
+	}
+	function cancelTimer()
+	{
+		if(timer!=null)
+			clearTimeout(timer);
+	}
+	function load(url)
+	{
+		window.location=url;
+	}
+</script>
+</head>
+<body>
+	<header>
+	<ul class="header-list" style="border-bottom: 3px solid #4682B4">
+		<li><div style="padding-left:50px"><img src="./images/LOGO.png" width="100px" height="70px" id="logo" onmouseover="startTimer(2000)" onmouseout="cancelTimer()"></div></li>
+		<li>
+			<div>
+				<ul class="menu-ul">
+					<li><a href="index.html" style="color:#4682B4">HOME</a></li>
+					<li><a href="PAGE2(introduction).html">회사소개</a></li>
+					<li><a href="PAGE3.html">아이콘 및 이미지</a></li>
+					<li><a href="PAGE4.html">아이콘 및 이미지 공유</a></li>
+					<li><a href="PAGE5.html">검색창</a></li>
+					<li><a href="PAGE6.html">로그인/회원가입</a></li>
+				</ul>
+			</div>
+		</li>
+		<li>
+			<div>
+				<input type="checkbox" id="menuicon">
+				<label for="menuicon">
+					<span></span>
+					<span></span>
+					<span></span>
+				</label>
+				<div class="sidebar">
+					<ul class="sitemap-ul">
+						<li><a href="index.html" style="font-size:13px">회사소개</a>
+						</li>
+						<li><a href="PAGE3.html" style="font-size:13px">아이콘 및 이미지</a>
+							<ul>
+								<li><a href="PAGE3.html">아이콘</a></li>
+								<li><a href="PAGE3.html">이미지</a></li>
+								<li><a href="PAGE3.html">인기 아이콘 및 이미지</a></li>
+							</ul>
+						</li>
+						<li><a href="PAGE4.html" style="font-size:13px">아이콘 및 이미지 공유</a>
+							<ul>
+								<li><a href="PAGE4.html">아이콘 및 이미지 공유</a></li>
+								<li><a href="#">공유 오류 신고</a></li>
+								<li><a href="#">Q&A</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+				</div>			
+			</div>
+		</li>
+	</ul>
+</header>
+<br>
+<br>
+
+<div class="section">
+	<input type="radio" name="slide" id="slide01" checked>
+	<input type="radio" name="slide" id="slide02">
+	<input type="radio" name="slide" id="slide03">
+	<div class="slidewrap">
+		
+		<ul class="slidelist">
+
+			<li class="slideitem">
+				<a>
+					<div class="textbox">
+						<h3 style="color:#4682B4;">BEST iCON</h3>
+						<p  style="color:black;">다운로드하세요:)</p>
+					</div>
+					<img src="./images/image1.png" height="400px" >
+				</a>
+			</li>
+			<li class="slideitem">
+				<a>
+					
+					<div class="textbox">
+						<h3 style="color:#4682B4;">BEST iCON</h3>
+						<p  style="color:black;">다운로드하세요:)</p>
+					</div>
+					<img src="./images/image2.png" height="400px">
+				</a>
+			</li>
+			<li class="slideitem">
+				<a>
+					
+					<div class="textbox">
+						<h3  style="color:#4682B4;">BEST iCON</h3>
+						<p  style="color:black;">다운로드하세요:)</p>
+					</div>
+					<img src="./images/image3.png" height="400px">
+				</a>
+			</li class="slideitem">
+
+			<div class="slide-control">
+				<div>
+					<label for="slide03" class="left"></label>
+					<label for="slide02" class="right"></label>
+				</div>
+				<div>
+					<label for="slide01" class="left"></label>
+					<label for="slide03" class="right"></label>
+				</div>
+				<div>
+					<label for="slide02" class="left"></label>
+					<label for="slide01" class="right"></label>
+				</div>
+			</div>
+
+		</ul>
+
+		<ul class="slide-pagelist">
+			<li><label for="slide01"></label></li>
+			<li><label for="slide02"></label></li>
+			<li><label for="slide03"></label></li>
+		</ul>
+	</div>
+
+	
+</div>
+
+</body>
+</html>
